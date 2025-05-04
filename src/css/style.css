@@ -1,0 +1,63 @@
+.validate-card-widget {
+  width: 47%;
+}
+
+.h3 {
+  font-size: 1.3em;
+}
+
+.cards {
+  margin:10px 0 10px 0;
+  height:25px;
+}
+
+.cards li {
+  display: block;
+  float: left;
+}
+
+.card {
+  float: left;
+  width: 39px;
+  height: 25px;
+  text-indent: -9999px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-right: 4px;
+  border: black 1px solid;
+  border-radius: 12%;
+}
+
+.visa {
+  background-image: url("../image/visa-svgrepo-com.svg");
+}
+
+.mastercard {
+  background-image: url("../image/mastercard-svgrepo-com.svg");
+}
+
+.amex {
+  background-image: url("../image/amex-svgrepo-com.svg");
+}
+
+.jcb {
+  background-image: url("../image/jcb-svgrepo-com.svg");
+}
+
+.discover {
+  background-image: url("../image/discover-svgrepo-com.svg");
+}
+
+.diners {
+  background-image: url("../image/diners-svgrepo-com.svg");
+}
+
+.mir {
+  background-image: url("../image/mir-svgrepo-com.svg");
+}
+
+.card-disabled {
+  background-position: 0 -25px;
+  opacity: 0.3;
+}

@@ -8,7 +8,6 @@ export default [
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
   pluginJs.configs.recommended,
-  eslintPluginPrettierRecommended,
   {
     rules: {
       "no-unused-vars": "warn",
@@ -26,4 +25,5 @@ export default [
       "jest/expect-expect": "error",
     },
   },
+  eslintPluginPrettierRecommended,
 ];

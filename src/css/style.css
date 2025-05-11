@@ -1,19 +1,20 @@
 body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
-  background-color: #fff;
   margin: 0;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .validate-card-widget {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  line-height: 20px;
+  box-sizing: border-box;
   width: 47%;
   margin: auto;
+}
+
+.validate-card-widget * {
+  box-sizing: border-box;
 }
 
 .h3 {
@@ -74,22 +75,46 @@ body {
 }
 
 .card-disabled {
-  background-position: 0 -25px;
+  filter: grayscale(1);
   opacity: 0.3;
 }
 
 .box-of-form {
   display: inline-block;
+  height: 34px;
   margin-bottom: 0;
-  vertical-align: middle
+  /*vertical-align: middle;*/
+}
+
+.submit-button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 10px;
+  color: #fff;
+  background-color: #5cb85c;
+  background-image: none;
+  border: 1px solid #4cae4c;
+  border-radius: 4px;
+  text-decoration: none;
 }
 
 .input-field {
   height: 34px;
   width: auto;
+  float: left;
   padding: 6px 12px;
   font-size: 14px;
-  line-height: 1.42857143;
+  line-height: 20px;
   color: #555;
   background-color: #fff;
   background-image: none;
@@ -102,26 +127,4 @@ body {
 .input-field::placeholder {
   color: #999;
   opacity: 1;
-}
-
-.submit-button {
-  margin-left: 10px;
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  touch-action: manipulation;
-  cursor: pointer;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
 }

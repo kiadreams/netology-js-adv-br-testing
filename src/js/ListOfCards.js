@@ -1,32 +1,22 @@
-export class ListOfCards {
+export default class ListOfCards {
   #typeCards;
 
-  constructor() {
-    this.#typeCards = [
-      'visa',
-      'mastercard',
-      'amex',
-      'discover',
-      'jcb',
-      'diners',
-      'mir',
-    ];
-    this.listOfCards = this.#createListOfCards();
+  constructor(boxOfCards, typeCards) {
+    this.#typeCards = typeCards;
+    this.cards = boxOfCards;
+    this.#createCards();
   }
 
-  #createListOfCards() {
-    const cards = document.createElement('ul');
-    cards.classList.add('cards');
+  #createCards() {
     this.#typeCards.forEach((typeCard) => {
-      cards.append(this.#createCard(typeCard));
+      this.cards.append(this.#createCard(typeCard));
     });
-    return cards;
   }
 
   #createCard(typeCard) {
     const cardBox = document.createElement('li');
     const card = document.createElement('span');
-    card.classList.add('card', typeCard);
+    card.classList.add('card', typeCard, 'card-disabled');
     card.textContent = typeCard;
     card.setAttribute('title', typeCard);
     cardBox.append(card);

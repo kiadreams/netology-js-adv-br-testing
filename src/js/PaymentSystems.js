@@ -1,5 +1,5 @@
 export default class PaymentSystems {
-  types = [
+  static types = [
     'visa',
     'mastercard',
     'amex',

@@ -1,9 +1,12 @@
+import PaymentSystems from './PaymentSystems';
+
+
 export default class ListOfCards {
   #typeCards;
 
-  constructor(boxOfCards, typeCards) {
-    this.#typeCards = typeCards;
-    this.cards = boxOfCards;
+  constructor() {
+    this.#typeCards = PaymentSystems.types;
+    this.cards = document.querySelector('.cards');;
     this.#createCards();
   }
 
@@ -21,5 +24,18 @@ export default class ListOfCards {
     card.setAttribute('title', typeCard);
     cardBox.append(card);
     return cardBox;
+  }
+
+  showCard(cardType) {
+    if (cardType) {
+      const card = this.cards.querySelector(`.${cardType}`);
+      card.classList.remove('card-disabled');
+    }
+  }
+
+  disableCards() {
+    this.cards.querySelectorAll('.card').forEach((card) => {
+      card.classList.add('card-disabled');
+    });
   }
 }

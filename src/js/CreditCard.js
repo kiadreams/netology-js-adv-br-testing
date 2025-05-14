@@ -1,14 +1,43 @@
 export default class CreditCard {
-  constructor(cardNumber) {
-    this.number = cardNumber;
-    this.firstDigitOfNuber = Number(this.number.slice(0, 1));
-    this.twoDigitsOfNumber = Number(this.number.slice(0, 2));
-    this.threeDigitsOfNumber = Number(this.number.slice(0, 3));
-    this.fourDigitsOfNumber = Number(this.number.slice(0, 4));
-    this.sixDigitsOfNumber = Number(this.number.slice(0, 4));
+  static instance;
+  #number;
+
+  constructor(cardNumber = '') {
+    if (!CreditCard.instance) {
+      CreditCard.instance = this;
+      this.#number = cardNumber;
+      this.getCardDetails();
+    }
+    return CreditCard.instance;
   }
 
-  static validateCardNumber(cardNumber) {
+  set number(number) {
+    this.#number = number;
+    this.getCardDetails();
+  }
+
+  get number() {
+    return this.#number;
+  }
+
+  getCardDetails() {
+    this.firstDigitOfNuber = Number(this.#number.slice(0, 1));
+    this.twoDigitsOfNumber = Number(this.#number.slice(0, 2));
+    this.threeDigitsOfNumber = Number(this.#number.slice(0, 3));
+    this.fourDigitsOfNumber = Number(this.#number.slice(0, 4));
+    this.sixDigitsOfNumber = Number(this.#number.slice(0, 4));
+  }
+
+  isCardNumberCorrect() {
+    if (isNaN(Number(this.#number))) {
+      alert('Номер карты должен состоять только из цифр');
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateCardNumber(cardNumber) {
     if (cardNumber.length < 12 || isNaN(Number(cardNumber))) {
       return false;
     }

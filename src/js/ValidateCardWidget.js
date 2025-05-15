@@ -17,7 +17,11 @@ export default class ValidateCardWidget {
 
   checkCardNumber(e) {
     e.preventDefault();
-    console.log(e, this.widgetForm.inputField.value);
+    if (this.widgetForm.validateCard()) {
+      alert('Номер карты корректный!');
+    } else {
+      alert('Указан некоректный номер карты!');
+    }
   }
 
   checkTypeOfCard(e) {
@@ -28,11 +32,9 @@ export default class ValidateCardWidget {
     this._inputTimeout = setTimeout(() => {
       this.listOfCards.disableCards();
       this.widgetForm.setCardNumber();
-      if (this.widgetForm.isCardCorrect()) {
-        this.listOfCards.showCard(this.widgetForm.cardType);
-      } else {
-        this.widgetForm.clear();
+      if (this.widgetForm.card.number) {
+        this.listOfCards.showCardType(this.widgetForm.cardType);
       }
-    }, 300);
+    }, 200);
   }
 }

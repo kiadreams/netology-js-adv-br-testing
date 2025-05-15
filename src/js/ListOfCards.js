@@ -26,7 +26,7 @@ export default class ListOfCards {
     return cardBox;
   }
 
-  showCard(cardType) {
+  showCardType(cardType) {
     if (cardType) {
       const card = this.cards.querySelector(`.${cardType}`);
       card.classList.remove('card-disabled');

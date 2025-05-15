@@ -28,21 +28,12 @@ export default class CreditCard {
     this.sixDigitsOfNumber = Number(this.#number.slice(0, 4));
   }
 
-  isCardNumberCorrect() {
-    if (isNaN(Number(this.#number))) {
-      alert('Номер карты должен состоять только из цифр');
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  validateCardNumber(cardNumber) {
-    if (cardNumber.length < 12 || isNaN(Number(cardNumber))) {
+  validateCardNumber() {
+    if (this.number.length < 12) {
       return false;
     }
     let summaOfNumbers = 0;
-    const payloadDigits = cardNumber.slice(0, -1);
+    const payloadDigits = this.number.slice(0, -1);
     const parity = payloadDigits.length % 2;
     [...payloadDigits].forEach((numValue, i) => {
       const num = Number(numValue);
@@ -54,7 +45,7 @@ export default class CreditCard {
     });
     return (
       (10 - (summaOfNumbers % 10)) % 10 ===
-      Number(cardNumber[cardNumber.length - 1])
+      Number(this.number[this.number.length - 1])
     )
   }
 }

@@ -29,6 +29,8 @@ test.each([
 ])(
   'check card number of %s card',
   (cardName, cardNumber, expected) => {
-    const result = CreditCard.validateCardNumber(cardNumber)
+    const card = new CreditCard();
+    card.number = cardNumber;
+    const result = card.validateCardNumber();
     expect(result).toBe(expected)
   });

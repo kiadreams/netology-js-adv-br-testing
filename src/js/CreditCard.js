@@ -1,35 +1,26 @@
-export default class CreditCard {
-  static instance;
-  #number;
+import PaymentSystems from "./PaymentSystems";
 
-  constructor(cardNumber = '') {
-    if (!CreditCard.instance) {
-      CreditCard.instance = this;
-      this.#number = cardNumber;
-      this.getCardDetails();
-    }
-    return CreditCard.instance;
+export default class CreditCard {
+  #paymentSystems;
+  #number
+
+  constructor(paymentSystems) {
+    this.#paymentSystems = paymentSystems;
+    this.#number = '';
+    this.paymentType = undefined;
   }
 
-  set number(number) {
-    this.#number = number;
-    this.getCardDetails();
+  set number(value) {
+    this.#number = value;
+    this.paymentType = this.#paymentSystems.typePaymentSystem(value);
   }
 
   get number() {
     return this.#number;
   }
 
-  getCardDetails() {
-    this.firstDigitOfNuber = Number(this.#number.slice(0, 1));
-    this.twoDigitsOfNumber = Number(this.#number.slice(0, 2));
-    this.threeDigitsOfNumber = Number(this.#number.slice(0, 3));
-    this.fourDigitsOfNumber = Number(this.#number.slice(0, 4));
-    this.sixDigitsOfNumber = Number(this.#number.slice(0, 4));
-  }
-
   validateCardNumber() {
-    if (this.number.length < 12) {
+    if (this.number.length < 12 || typeof this.paymentType === 'undefined') {
       return false;
     }
     let summaOfNumbers = 0;

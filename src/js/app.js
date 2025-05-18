@@ -1,3 +1,4 @@
 import ValidateCardWidget from './ValidateCardWidget';
 
-new ValidateCardWidget();
+const widgetContainer = document.querySelector('body');
+new ValidateCardWidget(widgetContainer);

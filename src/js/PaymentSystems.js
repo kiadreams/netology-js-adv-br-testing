@@ -1,82 +1,100 @@
 export default class PaymentSystems {
-  static types = [
-    'visa',
-    'mastercard',
-    'amex',
-    'discover',
-    'jcb',
-    'diners',
-    'mir'
-  ];
+  static types = {
+    VISA: 'visa',
+    MASTERCARD: 'mastercard',
+    AMEX: 'amex',
+    DISCOVER: 'discover',
+    JCB: 'jcb',
+    DINERS: 'diners',
+    MIR: 'mir',
+  };
+  #firstDigitOfNumber;
+  #twoDigitsOfNumber;
+  #threeDigitsOfNumber;
+  #fourDigitsOfNumber;
+  #sixDigitsOfNumber;
 
-  typePaymentSystem(card) {
-    if (this.#isVisaCard(card)) {
-      return 'visa';
-    } else if (this.#isMastercard(card)) {
-      return 'mastercard';
-    } else if (this.#isAmexCard(card)) {
-      return 'amex';
-    } else if (this.#isDiscoverCard(card)) {
-      return 'discover';
-    } else if (this.#isJsbCard(card)) {
-      return 'jcb';
-    } else if (this.#isDinersCard(card)) {
-      return 'diners';
-    } else if (this.#isMirCard(card)) {
-      return 'mir';
+  typePaymentSystem(cardNumber) {
+    this.#getCardDetails(cardNumber);
+    return this.#cardPaymentSystem;
+  }
+
+  get #cardPaymentSystem() {
+    if (this.#isVisaCard()) {
+      return PaymentSystems.types.VISA;
+    } else if (this.#isMastercard()) {
+      return PaymentSystems.types.MASTERCARD;
+    } else if (this.#isAmexCard()) {
+      return PaymentSystems.types.AMEX;
+    } else if (this.#isDiscoverCard()) {
+      return PaymentSystems.types.DISCOVER;
+    } else if (this.#isJsbCard()) {
+      return PaymentSystems.types.JCB;
+    } else if (this.#isDinersCard()) {
+      return PaymentSystems.types.DINERS;
+    } else if (this.#isMirCard()) {
+      return PaymentSystems.types.MIR;
     } else {
       return undefined;
     }
   }
 
-  #isVisaCard(card) {
-    return card.firstDigitOfNuber === 4;
+  #getCardDetails(number) {
+    this.#firstDigitOfNumber = Number(number.slice(0, 1));
+    this.#twoDigitsOfNumber = Number(number.slice(0, 2));
+    this.#threeDigitsOfNumber = Number(number.slice(0, 3));
+    this.#fourDigitsOfNumber = Number(number.slice(0, 4));
+    this.#sixDigitsOfNumber = Number(number.slice(0, 4));
   }
 
-  #isMastercard(card) {
-    if (this.isItInRange(51, 55, card.twoDigitsOfNumber)) {
+  #isVisaCard() {
+    return this.#firstDigitOfNumber === 4;
+  }
+
+  #isMastercard() {
+    if (this.#isItInRange(51, 55, this.#twoDigitsOfNumber)) {
       return true;
     } else {
-      return this.isItInRange(222100, 272099, card.sixDigitsOfNumber);
+      return this.#isItInRange(222100, 272099, this.#sixDigitsOfNumber);
     }
   }
 
-  #isAmexCard(card) {
-    return [34, 37].includes(card.twoDigitsOfNumber);
+  #isAmexCard() {
+    return [34, 37].includes(this.#twoDigitsOfNumber);
   }
 
-  #isDiscoverCard(card) {
-    if (card.twoDigitsOfNumber === 65 || card.fourDigitsOfNumber === 6011) {
+  #isDiscoverCard() {
+    if (this.#twoDigitsOfNumber === 65 || this.#fourDigitsOfNumber === 6011) {
       return true;
-    } else if (this.isItInRange(644, 649, card.threeDigitsOfNumber)) {
+    } else if (this.#isItInRange(644, 649, this.#threeDigitsOfNumber)) {
       return true;
     } else {
-      return this.isItInRange(622126, 622925, card.sixDigitsOfNumber)
+      return this.#isItInRange(622126, 622925, this.#sixDigitsOfNumber)
     }
   }
 
-  #isJsbCard(card) {
+  #isJsbCard() {
     for (let i = 3528; i < 3589; i++) {
-      if (i === card.fourDigitsOfNumber) {
+      if (i === this.#fourDigitsOfNumber) {
         return true;
       }
     }
     return false;
   }
 
-  #isDinersCard(card) {
-    if ([36, 54].includes(card.twoDigitsOfNumber)) {
+  #isDinersCard() {
+    if ([36, 54].includes(this.#twoDigitsOfNumber)) {
       return true;
     } else {
-      return this.isItInRange(300, 305, card.threeDigitsOfNumber);
+      return this.#isItInRange(300, 305, this.#threeDigitsOfNumber);
     }
   }
 
-  #isMirCard(card) {
-    return this.isItInRange(2200, 2204, card.fourDigitsOfNumber);
+  #isMirCard() {
+    return this.#isItInRange(2200, 2204, this.#fourDigitsOfNumber);
   }
 
-  isItInRange(start, end, number) {
+  #isItInRange(start, end, number) {
     for (let i = start; i < end + 1; i++) {
       if (i === number) {
         return true;

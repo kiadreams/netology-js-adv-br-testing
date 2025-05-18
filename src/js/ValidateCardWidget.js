@@ -3,16 +3,32 @@ import WidgetForm from './WidgetForm';
 
 
 export default class ValidateCardWidget {
-
-  constructor() {
-    this.listOfCards = new ListOfCards();
+  constructor(parentElement) {
+    this.cardList = new ListOfCards();
     this.widgetForm = new WidgetForm();
+    this.#fillUpParentElement(parentElement);
 
     this.checkCardNumber = this.checkCardNumber.bind(this);
     this.checkTypeOfCard = this.checkTypeOfCard.bind(this);
 
     this.widgetForm.inputField.addEventListener('input', this.checkTypeOfCard);
     this.widgetForm.form.addEventListener('submit', this.checkCardNumber);
+  }
+
+  #fillUpParentElement(parentElement) {
+    const widgetBox = this.#createWidgetBox();
+    widgetBox.append(this.cardList.cards);
+    widgetBox.append(this.widgetForm.form);
+    parentElement.append(widgetBox);
+  }
+
+  #createWidgetBox() {
+    const widgetBox = document.createElement('div');
+    widgetBox.classList.add('validate-card-widget');
+    const widgetHeader = document.createElement('h3');
+    widgetHeader.textContent = 'Проверка номера карты';
+    widgetBox.append(widgetHeader);
+    return widgetBox;
   }
 
   checkCardNumber(e) {
@@ -30,10 +46,10 @@ export default class ValidateCardWidget {
       clearTimeout(this._inputTimeout);
     }
     this._inputTimeout = setTimeout(() => {
-      this.listOfCards.disableCards();
+      this.cardList.disableCards();
       this.widgetForm.setCardNumber();
       if (this.widgetForm.card.number) {
-        this.listOfCards.showCardType(this.widgetForm.cardType);
+        this.cardList.showCardType(this.widgetForm.cardType);
       }
     }, 200);
   }

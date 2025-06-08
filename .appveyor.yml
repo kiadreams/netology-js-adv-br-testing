@@ -14,12 +14,13 @@ install:
 #  - corepack enable
 #  - yarn set version 4.8.1
 #  - yarn
-  - npm
+  - npm install
 
 build: off  # отключаем встроенную в appveyor систему сборки
 
 test_script:
 #  - yarn lint  # скрипт
+  - npm run test
   - npm run lint
 
 build_script:

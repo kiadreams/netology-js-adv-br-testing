@@ -1,5 +1,4 @@
-import PaymentSystems from '../PaymentSystems';
-
+import PaymentSystems from '../PaymentSystems'
 
 test.each([
   ['VISA', '4024007194942453', PaymentSystems.types.VISA],
@@ -14,6 +13,7 @@ test.each([
 ])(
   'Checking the payment system identification function: this card is %s',
   (cardName, cardNumber, expected) => {
-    const result = new PaymentSystems().typePaymentSystem(cardNumber);
+    const result = new PaymentSystems().typePaymentSystem(cardNumber)
     expect(result).toBe(expected)
-  });
+  }
+)

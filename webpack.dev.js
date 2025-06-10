@@ -1,5 +1,5 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
+const { merge } = require('webpack-merge')
+const common = require('./webpack.common')
 
 module.exports = merge(common, {
   // Set the mode to development or production
@@ -13,4 +13,4 @@ module.exports = merge(common, {
     compress: true,
     port: 9000,
   },
-});
+})

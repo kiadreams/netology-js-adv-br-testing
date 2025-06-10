@@ -1,4 +1,4 @@
-import ValidateCardWidget from './ValidateCardWidget';
+import ValidateCardWidget from './ValidateCardWidget'
 
-const widgetContainer = document.querySelector('body');
-new ValidateCardWidget(widgetContainer);
+const widgetContainer = document.querySelector('body')
+new ValidateCardWidget(widgetContainer)
